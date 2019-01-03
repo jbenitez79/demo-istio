@@ -1,0 +1,15 @@
+yaml
+kind: Deployment
+  metadata:
+name: sampleapp-canary
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sampleapp
+    spec:
+      containers:
+      - name: sampleapp
+        image: registry.ng.bluemix.net/spvlab/sampleapp:canary
+        imagePullPolicy: Always
