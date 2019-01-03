@@ -1,6 +1,8 @@
 kind: Deployment
-  metadata:
-name: sampleapp
+apiVersion: extensions/v1beta1
+metadata:
+ name: sampleapp
+ namespace: demo-istio
 spec:
   replicas: 1
   template:
@@ -10,13 +12,16 @@ spec:
     spec:
       containers:
       - name: sampleapp
-        image: registry.ng.bluemix.net/spvlab/sampleapp:v1
+        image: registry.ng.bluemix.net/spvlab/sampleapp:1.0
         imagePullPolicy: Always
+      imagePullSecrets:
+        - name: token-registry
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: samplepp
+  namespace: demo-istio
 spec:
   type: LoadBalancer
   ports:
